@@ -1,29 +1,33 @@
 import propTypes from "prop-types";
 import { Link } from "react-router-dom";
-function Movie({ medium_cover_image, title, summary, genres }) {
+import style from "../Movie.module.css";
+function Movie({ id, medium_cover_image, title, description_full, genres }) {
   return (
     <div>
-      <h1>Movies...</h1>
-
-      <div>
-        <div>
-          <img src={medium_cover_image} alt={medium_cover_image} />
-          <Link to="/movie">title : {title}</Link>
-          <p>{summary}</p>
-          <ul>
-            {genres.map((genre) => (
-              <li key={genre}>{genre}</li>
-            ))}
-          </ul>
-        </div>
+      <div className={style.content}>
+        <img src={medium_cover_image} alt={medium_cover_image} />
+        <h2 className={style.link}>
+          <Link to={`/movie/${id}`}> {title}</Link>
+        </h2>
+        <p>
+          {description_full.length > 235
+            ? `${description_full.slice(0, 235)}...`
+            : description_full}
+        </p>
+        <ul>
+          {genres.map((genre) => (
+            <li key={genre}>{genre}</li>
+          ))}
+        </ul>
       </div>
     </div>
   );
 }
 Movie.propTypes = {
+  id: propTypes.number.isRequired,
   medium_cover_image: propTypes.string.isRequired,
   title: propTypes.string.isRequired,
-  summary: propTypes.string.isRequired,
+  description_full: propTypes.string.isRequired,
   genres: propTypes.arrayOf(propTypes.string).isRequired,
 };
 export default Movie;
