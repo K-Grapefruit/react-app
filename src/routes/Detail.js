@@ -22,7 +22,7 @@ function Detail() {
   return (
     <div>
       {loading ? (
-        <h1>Loading.....</h1>
+        <h1>Loading....</h1>
       ) : (
         <Movie
           key={movie.id}
