@@ -2,6 +2,7 @@ import propTypes from "prop-types";
 import { Link } from "react-router-dom";
 import style from "../Movie.module.css";
 function Movie({ id, medium_cover_image, title, description_full, genres }) {
+  console.log(genres);
   return (
     <div>
       <div className={style.content}>
@@ -10,15 +11,11 @@ function Movie({ id, medium_cover_image, title, description_full, genres }) {
           <Link to={`/movie/${id}`}> {title}</Link>
         </h2>
         <p>
-          {description_full.length > 235
+          {description_full && description_full.length > 235
             ? `${description_full.slice(0, 235)}...`
             : description_full}
         </p>
-        <ul>
-          {genres.map((genre) => (
-            <li key={genre}>{genre}</li>
-          ))}
-        </ul>
+        <ul>{genres && genres.map((g) => <li key={g}>{g}</li>)}</ul>
       </div>
     </div>
   );
